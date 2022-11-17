@@ -6,7 +6,8 @@ describe "Battleship" do
 
   describe "PART 3" do
     describe "#initialize" do
-      it "should take in a number, n, representing the length of the board" do
+      it "should take in a number, n, representing the 
+      length of the board" do
         battleship
       end
 
@@ -24,12 +25,14 @@ describe "Battleship" do
         Battleship.new(4)
       end
 
-      it "should set @board to a Board instance with size n * n" do
+      it "should set @board to a Board instance with size 
+      n * n" do
         board = battleship.instance_variable_get(:@board)
         expect(board).to be_an_instance_of(Board)
       end
 
-      it "should set @remaining_misses to half the size of the board" do
+      it "should set @remaining_misses to half the size 
+      of the board" do
         expect(battleship.instance_variable_get(:@remaining_misses)).to eq(50)
 
         small_battleship = Battleship.new(4)
@@ -55,7 +58,8 @@ describe "Battleship" do
         battleship.start_game
       end
 
-      it "should print the number of ships placed on the @board" do
+      it "should print the number of ships placed on the 
+      @board" do
         expect { battleship.start_game }.to output(/25/).to_stdout
       end
 
@@ -66,7 +70,8 @@ describe "Battleship" do
     end
 
     describe "#lose?" do
-      context "when @remaining_misses is less than or equal to zero" do
+      context "when @remaining_misses is less than or equal 
+      to zero" do
         it "should print 'you lose'" do
           battleship.instance_variable_set(:@remaining_misses, -1)
           expect { battleship.lose? }.to output(/lose/).to_stdout
