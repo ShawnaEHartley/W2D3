@@ -36,44 +36,56 @@ class Board
     end
 
     def place_random_ships
-        while self.num_ships < (self.size * 0.25)
-            row = rand(0...@grid.length)
-            col = rand(0...@grid.length)
+        while self.num_ships < (size * 0.25)        # works with self.size, @size, and size
+            row = rand(0...@grid.length)  
+            col = rand(0...@grid.length)     
             pos = [row, col]
             self[pos] = :S
         end
     end
 
     def hidden_ships_grid
-        hidden_mat = []
-        i = 0
-        while i < @grid.length do 
-            j = 0
-            sub_arr = []
-            while j < @grid.length do
-                if @grid[i][j] == :S
-                    sub_arr << :N
+        @grid.map do |row|
+            row.map do |ele| 
+                if ele == :S
+                    :N
                 else
-                    sub_arr << @grid[i][j]
+                    ele
                 end
-                j += 1
             end
-            hidden_mat << sub_arr
-            i += 1
         end
-        hidden_mat
+
+        # hidden_mat = []
+        # i = 0
+        # while i < @grid.length do 
+        #     j = 0
+        #     sub_arr = []
+        #     while j < @grid.length do
+        #         if @grid[i][j] == :S
+        #             sub_arr << :N
+        #         else
+        #             sub_arr << @grid[i][j]
+        #         end
+        #         j += 1
+        #     end
+        #     hidden_mat << sub_arr
+        #     i += 1
+        # end
+        # hidden_mat
     end
 
     def self.print_grid(arr)
-        grid = ""
         arr.each do |row|
-            row.each do |ele|
-                grid += ele.to_s
-                grid += " "
-            end
+            puts row.join(" ")
         end
-        grid
     end
 
+    def cheat
+        Board.print_grid(@grid)
+    end
+
+    def print
+        Board.print_grid(self.hidden_ships_grid)
+    end
 
 end
